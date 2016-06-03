@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TicTacToe</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.compat.min.js"></script>
+
+
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  
+
+  <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script src="static/computermoves.js"></script>
+  <script src="static/app.js"></script>
+  <script src="spec/Specs.js"></script>
+  
+  
+  <style>
+  #feedback { font-size: 1.4em; }
+  #selectable .ui-selecting { background: #FECA40; }
+  /* #selectable .ui-selected { background: #F39814; color: white; }*/
+  #selectable { list-style-type: none; margin: 0; padding: 0; width: 350px; }
+  #selectable li { margin: 3px; padding: 1px; float: left; width: 100px; height: 80px; font-size: 4em; text-align: center; }
+  .mycontent { float: bottom; margin-bottom: 300px; }
+  .jasmin_reporter {float: bottom; }
+    
+  </style>
+  
+  <script>
+  $(function() {
+     
+     logic = new Funcs();
+     var outcome;
+     
+     var cleartiles = function() {
+       $("#selectable li").each(function(item) {
+         $(this).text('');
+       });
+        $("#message").text('');
+        
+     }
+     
+     $("#clearButton").click(function() {
+        logic.clear_selected_tiles();
+        $("#selectable li").each(function(item) {
+         $(this).text('');
+       });
+     });
+     
+     $( "#startButton" ).click(function() {
+         
+         var tilestr;
+         cleartiles();
+         logic.clear_selected_tiles();
+          
+          $("#selectable").selectable();
+           
+           //Initialize the selectable with the selected callback specified
+          $("#selectable").selectable({
+              selected: function( event, ui ) {}
+          });
+          
+          $("#selectable li:eq(0)").text("O");
+          logic.add_selected_tile(0);
+          // User click  
+          $( "#selectable" ).on( "selectableselected", function( event, ui ) {
+              
+              //Keep track of selected text so you can't select it again
+              n = $(ui.selected).index();
+              console.log("the child n " + n);
+              if(logic.checkIsSelected(n)) { 
+                console.log("found that it is selected" + n);
+                return false;
+              }
+              logic.add_selected_tile(n);
+              $(ui.selected).text("X");
+              
+              // create string
+              tilestr = $("#selectable li").map(function(){return $(this).text() ? $(this).text(): '_';}).get().join("");
+              console.log('tilestr:' + tilestr);
+              
+              // pass string
+              ol = $("#selectable");
+              outcome = logic.handlestr(ol,tilestr);
+              console.log(outcome);
+              
+              switch(outcome.case) {
+                
+                case 'computerlost':
+                  console.log('won string:' + tilestr);
+                  console.log('computerlost');
+                  $("#message").text("You won!");
+                  break;
+                
+                case 'computerturn':
+                  console.log('computerturn');
+                  break;
+                
+                case 'computerwon':
+                  console.log('computerwon');
+                  $("#message").text("The computer won. Try again.");
+                  break;
+                default:
+                  console.log('default');
+              }
+          });
+          
+        
+      }); //end startButton
+      
+      $( "#selectable" ).disabled();
+      
+  }); // end jquery
+  </script>
+</head>
+<body>
+ 
+<div class="mycontent" style="margin-left:auto;margin-right:auto;width:30%">
+
+<div> 
+  <input id="startButton" type="button" value="Click to Start"> 
+   <input id="clearButton" type="button" value="Clear"> 
+</div>
+
+<div>
+<span id="message" style="font-family: Arial; font-size:2em"></span>
+<ol id="selectable">
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+  <li class="ui-state-default"></li>
+
+</ol>
+
+</div>
+
+</div>
+ 
+</body>
+</html>
