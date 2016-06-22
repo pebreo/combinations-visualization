@@ -12,6 +12,9 @@
 
     <title>Grid Template for Bootstrap</title>
 
+    <!-- AngularJS -->
+    <script src="https://code.angularjs.org/1.2.1/angular.min.js"></script>
+    
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div ng-app ng-controller="MyCtrl" class="container">
 
       <div class="page-header">
         <h1>Combinations and Permutations Demo</h1>
@@ -43,8 +46,7 @@
      
       
 
-      <h3>Two columns</h3>
-      <p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
+     
       <div class="row">
       
         <div class="col-md-6">
@@ -146,6 +148,7 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/app.js"></script>
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
