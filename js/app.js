@@ -1,4 +1,4 @@
-var app = angular.module('myApp');
+var app = angular.module('myApp',[]);
 
 
 app.controller('MyCtrl', ['$scope','$log', function($scope,$log) {
