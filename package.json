@@ -1,0 +1,23 @@
+{
+  "name": "temp-combination",
+  "version": "1.0.0",
+  "description": "http://stackoverflow.com/questions/9960908/permutations-in-javascript",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pebreo/combinations-visualization.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pebreo/combinations-visualization/issues"
+  },
+  "homepage": "https://github.com/pebreo/combinations-visualization#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  }
+}
