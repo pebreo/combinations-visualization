@@ -13,21 +13,22 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     $scope.item_count = 1;
     $log.log('foo');
     $scope.item_names = {
-        1: 'One',
-        2: 'Two',
-        3: 'Three',
-        4: 'Four',
-        5: 'Five'
+        1: {'button_type': 'btn-primary', 'text': 'One'},
+        2: {'button_type': 'btn-warning', 'text': 'Two'},
+        3: {'button_type': 'btn-info', 'text': 'Three'},
+        4: {'button_type': 'btn-success', 'text': 'Four'},
+        5: {'button_type': 'btn-danger', 'text': 'Five'}
     };
     $scope.good_items = [];
     $scope.get_good_items = function()
     {
         var items = [];
-        var n = 0;
+        var n = 1;
         while(n <= $scope.item_count) {
             items.push($scope.item_names[n]);
             n++;
         }
+        $log.log(items);
         return items;
     };
     $scope.range = function(min, max, step) {
