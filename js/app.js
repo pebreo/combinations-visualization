@@ -4,32 +4,48 @@ var app = angular.module('myApp', []);
 app.directive('myElem', function(){
     return {
         restrict: 'E',
-        template: '<h5>hello</h5>',
+        template: '<h5 ng-repeat="n in range(5,15)">{{n}}</h5>',
     };
 });
 
 app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     $scope.cols = 1;
-    $scope.items = 1;
+    $scope.item_count = 1;
     $log.log('foo');
-
+    $scope.item_names = {
+        1: 'One',
+        2: 'Two',
+        3: 'Three',
+        4: 'Four',
+        5: 'Five'
+    };
+    $scope.range = function(min, max, step) {
+        step = step || 1;
+        var input = [];
+        for (var i = min; i <= max; i += step) {
+            input.push(i);
+        }
+        return input;
+    };
     $scope.additem = function () {
         $log.log('add');
-        if ($scope.items < 5) {
-            $scope.items += 1;
+        if ($scope.item_count < 5) {
+            $scope.item_count += 1;
         }
     };
 
     $scope.remove_item = function () {
         $log.log('remove');
-        if ($scope.items > 1) {
-            $scope.items -= 1;
+        if ($scope.item_count > 1) {
+            $scope.item_count -= 1;
         }
     };
 
     $scope.create = function () {
-        //alert($scope.items);
-        $log.log($scope.items);
+        //alert($scope.item_count);
+        $log.log($scope.item_count);
+        var b = _.join(['a','b']);
+        $log.log(b);
     };
 
     $scope.hello = function () {
