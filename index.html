@@ -40,7 +40,7 @@
   <div class="page-header">
     <h1>Combinations and Permutations Demo</h1>
 
-    <p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+    <p class="lead">A web app that demonstrates what are combinations and permutations and the difference between them.</p>
   </div>
 
 
@@ -55,11 +55,14 @@
           <form role="form">
 
             <div class="form-group">
-              <button type="submit" class="btn btn-success">Remove Item</button>
-              <button type="submit" class="btn btn-success">Add Item</button>
+              <button ng-click="remove_item()" type="submit" class="btn btn-success">Remove Item</button>
+              <button ng-click="additem()" type="submit" class="btn btn-success">Add Item</button>
+              <button ng-click="create()" type="submit" class="btn btn-success">Create Permutations</button>
             </div>
 
           </form>
+
+         <my-elem></my-elem>
 
           <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
