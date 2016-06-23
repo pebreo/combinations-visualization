@@ -4,7 +4,7 @@ var app = angular.module('myApp', []);
 app.directive('myElem', function(){
     return {
         restrict: 'E',
-        template: '<h5 ng-repeat="n in range(5,15)">{{n}}</h5>',
+        templateUrl: 'set_items.html'
     };
 });
 
@@ -18,6 +18,17 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         3: 'Three',
         4: 'Four',
         5: 'Five'
+    };
+    $scope.good_items = [];
+    $scope.get_good_items = function()
+    {
+        var items = [];
+        var n = 0;
+        while(n <= $scope.item_count) {
+            items.push($scope.item_names[n]);
+            n++;
+        }
+        return items;
     };
     $scope.range = function(min, max, step) {
         step = step || 1;
