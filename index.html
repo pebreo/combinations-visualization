@@ -41,9 +41,10 @@
 <div ng-controller="MyCtrl" class="container">
 
   <div class="page-header">
-    <h1>Combinations and Permutations Demo</h1>
+    <h1>Visualizing Mathematical Combinations and Permutations</h1>
 
-    <p class="lead">A web app that demonstrates what are combinations and permutations and the difference between them.</p>
+    <p class="lead">An interactive web app that demonstrates combinations and permutations and the difference between
+      them.</p>
   </div>
 
 
@@ -54,6 +55,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">Add or Subtract Set Items</div>
         <div class="panel-body">
+          <p>Combinations and Permutations are made of unique items in a set. Click 'Remove Item' or 'Add Item'
+            to make the set bigger or smaller. These items will be picked and arranged in the Permutations and
+            Combinations below.
+          </p>
 
           <form role="form">
 
@@ -64,7 +69,6 @@
             </div>
 
           </form>
-
 
 
           <div class="btn-group btn-group-justified" role="group" aria-label="...">
@@ -85,7 +89,12 @@
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h4>Permutations</h4></div>
+        <div class="panel-body">
+          <p>A mathematical permutation is the number of different ways the items from a set (above)
+            are arranged. In permutations, we count all the uniquely arranged items toward the final permutation
+            number. In this case there are tk permutations for tk items.</p>
 
+        </div>
 
         <!-- List group -->
         <ul class="list-group">
@@ -118,7 +127,12 @@
       <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading"><h4>Combinations</h4></div>
+        <div class="panel-body">
+          <p>A mathematical combination is the number of  ways the items from a set (above)
+            are arranged <b> excluding duplicates </b>. In combinations, we don't count repetitions in
+            arrangements.  In this case there are tk combinations for tk items.</p>
 
+        </div>
 
         <!-- List group -->
         <ul class="list-group">
