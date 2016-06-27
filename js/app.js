@@ -1,37 +1,46 @@
 var app = angular.module('myApp', []);
 
 
-app.directive('myElem', function(){
+app.directive('myElem', function () {
     return {
         restrict: 'E',
         templateUrl: 'set_items.html'
     };
 });
 
+app.directive('permElem', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'perm_items.html'
+    };
+});
+
 app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
+
     $scope.cols = 1;
     $scope.item_count = 1;
     $log.log('foo');
     $scope.item_names = {
-        1: {'button_type': 'btn-primary', 'text': 'One','sqcolor':'red'},
-        2: {'button_type': 'btn-warning', 'text': 'Two','sqcolor':'green'},
-        3: {'button_type': 'btn-info', 'text': 'Three','sqcolor':'orange'},
-        4: {'button_type': 'btn-success', 'text': 'Four','sqcolor':'beige'},
-        5: {'button_type': 'btn-danger', 'text': 'Five','sqcolor':'purple'}
+        1: {'button_type': 'btn-primary', 'text': 'One', 'sqcolor': 'red'},
+        2: {'button_type': 'btn-warning', 'text': 'Two', 'sqcolor': 'green'},
+        3: {'button_type': 'btn-info', 'text': 'Three', 'sqcolor': 'orange'},
+        4: {'button_type': 'btn-success', 'text': 'Four', 'sqcolor': 'beige'},
+        5: {'button_type': 'btn-danger', 'text': 'Five', 'sqcolor': 'purple'}
     };
     $scope.good_items = [];
-    $scope.get_good_items = function()
-    {
+
+
+    $scope.get_good_items = function () {
         var items = [];
         var n = 1;
-        while(n <= $scope.item_count) {
+        while (n <= $scope.item_count) {
             items.push($scope.item_names[n]);
             n++;
         }
         //$log.log(items);
         return items;
     };
-    $scope.range = function(min, max, step) {
+    $scope.range = function (min, max, step) {
         step = step || 1;
         var input = [];
         for (var i = min; i <= max; i += step) {
@@ -44,6 +53,7 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         if ($scope.item_count < 5) {
             $scope.item_count += 1;
         }
+        $scope.get_permutations();
     };
 
     $scope.remove_item = function () {
@@ -51,12 +61,13 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         if ($scope.item_count > 1) {
             $scope.item_count -= 1;
         }
+        $scope.get_permutations();
     };
 
     $scope.create = function () {
         //alert($scope.item_count);
         $log.log($scope.item_count);
-        var b = _.join(['a','b']);
+        var b = _.join(['a', 'b']);
         $log.log(b);
     };
 
@@ -110,6 +121,35 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
             set.push(combination);
         }
         return set;
+    };
+
+    $scope.permutations_choose = function(xs, r)
+    {
+        if (!r) return [];
+        return xs.reduce(function (memo, cur, i) {
+            var others = xs.slice(0, i).concat(xs.slice(i + 1)),
+                perms = $scope.permutations_choose(others, r - 1),
+                newElms = !perms.length ? [[cur]] :
+                    perms.map(function (perm) {
+                        return [cur].concat(perm)
+                    });
+            return memo.concat(newElms);
+        }, []);
+    };
+
+    $scope.combinations_choose = function (list, choose) {
+
+    };
+
+    $scope.get_permutations = function () {
+        var set_items = $scope.range(1, $scope.item_count);
+        //var set_items = $scope.range(1,1);
+        //$log.log(set_items);
+        $scope.perm_list = $scope.permutations_choose(set_items, set_items.length);
+        $log.log($scope.perm_list);
+
+        $scope.comb_list = $scope.combinations(set_items);
+        //$log.log($scope.comb_list);
     };
 
 }]);
