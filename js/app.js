@@ -29,7 +29,6 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     };
     $scope.good_items = [];
 
-
     $scope.get_good_items = function () {
         var items = [];
         var n = 1;
@@ -40,6 +39,17 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         //$log.log(items);
         return items;
     };
+
+    $scope.make_button_row = function(list) {
+        var list = [1,2];
+        var items = [];
+        for(i=0; i<list.length;i++) {
+            items.push($scope.item_names[i+1]);
+        }
+        $log.log(items);
+        return items;
+    };
+
     $scope.range = function (min, max, step) {
         step = step || 1;
         var input = [];
@@ -53,7 +63,7 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         if ($scope.item_count < 5) {
             $scope.item_count += 1;
         }
-        $scope.get_permutations();
+
     };
 
     $scope.remove_item = function () {
@@ -61,7 +71,7 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         if ($scope.item_count > 1) {
             $scope.item_count -= 1;
         }
-        $scope.get_permutations();
+
     };
 
     $scope.create = function () {
@@ -71,18 +81,6 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         $log.log(b);
     };
 
-    $scope.hello = function () {
-        //alert('hello');
-        $scope.divs = ["test1", "test2"];
-        var foo = $scope.permutator([1, 2]);
-        alert(foo);
-        var baz = $scope.combinations([1, 2]);
-        alert(baz);
-    };
-    $scope.hello2 = function () {
-        //alert('hello');
-        $scope.divs = ["test1", "test2", "test3", "test4", "test5"];
-    };
 
     $scope.permutator = function (inputArr) {
         var results = [];
@@ -137,19 +135,37 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         }, []);
     };
 
-    $scope.combinations_choose = function (list, choose) {
-
+    $scope.combinations_choose = function (list, r) {
+        var combos = $scope.combinations(list);
+        var results =  _.filter(combos, function(item) { return item.length == r;});
+        return results;
     };
 
-    $scope.get_permutations = function () {
-        var set_items = $scope.range(1, $scope.item_count);
-        //var set_items = $scope.range(1,1);
-        //$log.log(set_items);
-        $scope.perm_list = $scope.permutations_choose(set_items, set_items.length);
-        $log.log($scope.perm_list);
+    $scope.get_perms = function () {
+        //var set_items = $scope.range(1, $scope.item_count);
 
-        $scope.comb_list = $scope.combinations(set_items);
+        //$scope.perm_list = $scope.permutations_choose(set_items, set_items.length);
+        //$log.log($scope.perm_list);
+
+        //$scope.comb_list = $scope.combinations_choose(set_items, set_items.length);
         //$log.log($scope.comb_list);
+        var l = [];
+        l = [[1,2],[2,1]];
+        $log.log(l);
+        return l;
     };
+
+    //$scope.get_button_type = function(item){
+    //    return $scope.item_names[item].button_type;
+    //};
+    //
+    //$scope.get_button_color = function(item){
+    //    return $scope.item_names[item].sqcolor;
+    //
+    //};
+    //
+    //$scope.get_button_text = function(item){
+    //    return $scope.item_names[item].text;
+    //};
 
 }]);

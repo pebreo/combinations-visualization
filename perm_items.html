@@ -1,9 +1,10 @@
-<li ng-repeat="n in range(1,2)" class="list-group-item">
+<li ng-repeat="perms in range(1,3)" class="list-group-item">
 
-  <div class="btn-group btn-group-justified" role="group" aria-label="...">
-    <div ng-repeat="j in range(1,3)" class="btn-group" role="group">
-      <button type="button" class="btn btn-default">Left</button>
+
+    <div class="btn-group" role="group">
+      <button ng-repeat="item in make_button_row()" type="button" class="btn {{item.button_type}}">{{item.text}}<div id="square" style="background:{{item.sqcolor}}"></div></button>
     </div>
-  </div>
+
+  
 
 </li>
