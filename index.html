@@ -50,9 +50,9 @@
 <div ng-controller="MyCtrl" class="container">
 
   <div class="page-header">
-    <h1>Visualizing Mathematical Combinations and Permutations</h1>
-
-    <p class="lead">An interactive web app that demonstrates combinations and permutations and the difference between
+    <h1 class="text-center">Visualizing Mathematical Combinations and Permutations</h1>
+    <h2 class="text-center">by Paul Ebreo</h2>
+    <p class="lead text-center">An interactive web app that demonstrates combinations and permutations and the difference between
       them.</p>
   </div>
 
@@ -62,7 +62,7 @@
     <div class="col-md-6">
 
       <div class="panel panel-default">
-        <div class="panel-heading"><h4>Step 1. Add or Subtract Set Items</h4></div>
+        <div class="panel-heading"><h4>Step 1. Create a unique list of items (set)</h4></div>
         <div class="panel-body">
           <p>Combinations and Permutations are made of unique items in a set. Click 'Remove Item' or 'Add Item'
             to make the set bigger or smaller. These items will be picked and arranged in the Permutations and
@@ -74,7 +74,6 @@
             <div class="form-group">
               <button ng-click="remove_item()" type="submit" class="btn btn-success">Remove Item</button>
               <button ng-click="additem()" type="submit" class="btn btn-success">Add Item</button>
-              <button ng-click="create()" type="submit" class="btn btn-success">Create Permutations</button>
             </div>
 
           </form>
@@ -114,7 +113,7 @@
         <div class="panel-body">
           <p>A mathematical permutation is the number of different ways the items from a set (above)
             can be arranged. In permutations, we count all the uniquely arranged items toward the final permutation
-            number. For example, the arrangement ABC is counted separately from CBA and is therefore counted
+            number. For example, the arrangement 123 is counted separately from 321 and is therefore counted
             as 2 separate permutations.</p>
           <p> From the set of items we created above,  there are <b>{{permutations_count}} permutations for {{item_count}} items</b>.</p>
 
@@ -135,7 +134,7 @@
         <div class="panel-heading"><h4>Step 3. Combinations</h4></div>
         <div class="panel-body">
           <p>A mathematical combination is basically the number of permutations but
-            <b> excluding duplicates</b>. For example, a combination of ABC is the same as CBA
+            <b> excluding duplicates</b>. For example, a combination of 1234 is the same as 4321
             because the same items are in the arrangement and is therefore counted as 1 single combination. In combinations, we don't count arrangements with the same
             unique items in them.</p>
 
