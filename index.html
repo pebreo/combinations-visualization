@@ -84,6 +84,19 @@
             <my-elem></my-elem>
           </div>
 
+         <p>
+             <form role="form">
+
+            <div class="form-group">
+              <button ng-click="decrease_slot()" type="submit" class="btn btn-info">Decrease Number of Slots</button>
+              <button ng-click="add_slot()" type="submit" class="btn btn-info">Increase Number of Slots</button>
+            </div>
+
+          </form>
+         </p>
+          <p>
+            <h3>{{slot_count}}</h3>
+          </p>
 
         </div>
       </div>
@@ -103,7 +116,7 @@
             can be arranged. In permutations, we count all the uniquely arranged items toward the final permutation
             number. For example, the arrangement ABC is counted separately from CBA and is therefore counted
             as 2 separate permutations.</p>
-          <p> From the set of items we created above,  there are tk permutations for tk items.</p>
+          <p> From the set of items we created above,  there are <b>{{permutations_count}} permutations for {{item_count}} items</b>.</p>
 
         </div>
 

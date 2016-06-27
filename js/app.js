@@ -19,7 +19,8 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
 
     $scope.cols = 1;
     $scope.item_count = 1;
-    $log.log('foo');
+    $scope.slot_count = 1;
+    $scope.permutations_count = 1;
     $scope.item_names = {
         1: {'button_type': 'btn-primary', 'text': 'One', 'sqcolor': 'red'},
         2: {'button_type': 'btn-warning', 'text': 'Two', 'sqcolor': 'green'},
@@ -40,12 +41,12 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         return items;
     };
 
-    $scope.make_button_row = function(list) {
+    $scope.make_button_row = function(arrangement) {
         //var list = [1,2];
-        $log.log(list);
+        $log.log(arrangement);
         var items = [];
-        for(i=0; i<list.length;i++) {
-            items.push($scope.item_names[list[i]]);
+        for(i=0; i<arrangement.length;i++) {
+            items.push($scope.item_names[arrangement[i]]);
         }
         //$log.log(items);
         return items;
@@ -63,6 +64,7 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         $log.log('add');
         if ($scope.item_count < 5) {
             $scope.item_count += 1;
+            $scope.slot_count = $scope.item_count;
         }
 
     };
@@ -71,6 +73,24 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         $log.log('remove');
         if ($scope.item_count > 1) {
             $scope.item_count -= 1;
+            $scope.slot_count = $scope.item_count;
+
+        }
+
+    };
+
+     $scope.add_slot = function () {
+        $log.log('add');
+        if ($scope.slot_count < $scope.item_count) {
+            $scope.slot_count += 1;
+        }
+
+    };
+
+    $scope.decrease_slot = function () {
+        $log.log('remove');
+        if ($scope.slot_count > 1) {
+            $scope.slot_count -= 1;
         }
 
     };
@@ -144,12 +164,13 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
 
     $scope.get_perms = function () {
         var set_items = $scope.range(1, $scope.item_count);
-        var perm_list = $scope.permutations_choose(set_items, set_items.length);
+        var perm_list = $scope.permutations_choose(set_items, $scope.slot_count);
         //$log.log($scope.perm_list);
 
         //$scope.comb_list = $scope.combinations_choose(set_items, set_items.length);
         //$log.log($scope.comb_list);
-        $log.log(perm_list);
+        //$log.log(perm_list);
+        $scope.permutations_count = perm_list.length;
         return perm_list;
     };
 
