@@ -41,12 +41,13 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     };
 
     $scope.make_button_row = function(list) {
-        var list = [1,2];
+        //var list = [1,2];
+        $log.log(list);
         var items = [];
         for(i=0; i<list.length;i++) {
-            items.push($scope.item_names[i+1]);
+            items.push($scope.item_names[list[i]]);
         }
-        $log.log(items);
+        //$log.log(items);
         return items;
     };
 
@@ -142,17 +143,14 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     };
 
     $scope.get_perms = function () {
-        //var set_items = $scope.range(1, $scope.item_count);
-
-        //$scope.perm_list = $scope.permutations_choose(set_items, set_items.length);
+        var set_items = $scope.range(1, $scope.item_count);
+        var perm_list = $scope.permutations_choose(set_items, set_items.length);
         //$log.log($scope.perm_list);
 
         //$scope.comb_list = $scope.combinations_choose(set_items, set_items.length);
         //$log.log($scope.comb_list);
-        var l = [];
-        l = [[1,2],[2,1]];
-        $log.log(l);
-        return l;
+        $log.log(perm_list);
+        return perm_list;
     };
 
     //$scope.get_button_type = function(item){
