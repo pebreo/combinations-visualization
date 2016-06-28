@@ -52,7 +52,7 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
 
     $scope.make_button_row = function(arrangement) {
         //var list = [1,2];
-        $log.log(arrangement);
+        //$log.log(arrangement);
         var items = [];
         for(i=0; i<arrangement.length;i++) {
             items.push($scope.item_names[arrangement[i]]);
@@ -106,9 +106,9 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
 
     $scope.create = function () {
         //alert($scope.item_count);
-        $log.log($scope.item_count);
+        //$log.log($scope.item_count);
         var b = _.join(['a', 'b']);
-        $log.log(b);
+        //$log.log(b);
     };
 
 
@@ -151,12 +151,12 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         return set;
     };
 
-    $scope.permutations_choose = function(xs, r)
+    var permutations_choose = function(xs, r)
     {
         if (!r) return [];
         return xs.reduce(function (memo, cur, i) {
             var others = xs.slice(0, i).concat(xs.slice(i + 1)),
-                perms = $scope.permutations_choose(others, r - 1),
+                perms = permutations_choose(others, r - 1),
                 newElms = !perms.length ? [[cur]] :
                     perms.map(function (perm) {
                         return [cur].concat(perm)
@@ -171,20 +171,31 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         return results;
     };
 
-    $scope.get_perms = function () {
-        var set_items = $scope.range(1, $scope.item_count);
-        var perm_list = $scope.permutations_choose(set_items, $scope.slot_count);
-        //$log.log($scope.perm_list);
+    $scope.perm_set_items = [];
+    $scope.perm_choose_list = [];
 
-        $scope.permutations_count = perm_list.length;
-        return perm_list;
+    $scope.combo_set_items = [];
+    $scope.combo_choose_list = [];
+
+    $scope.$watch('item_count', function(){
+        $scope.perm_set_items = $scope.range(1, $scope.item_count);
+        $scope.perm_choose_list = permutations_choose($scope.perm_set_items, $scope.slot_count);
+        $scope.permutations_count = $scope.perm_choose_list.length;
+
+        $scope.combo_choose_list = [];
+        $scope.combo_set_items = $scope.range(1, $scope.item_count);
+        $scope.combo_choose_list = $scope.combinations_choose($scope.combo_set_items, $scope.slot_count);
+        $scope.combinations_count = $scope.combo_choose_list.length;
+
+    });
+
+    $scope.get_perms = function () {
+        return $scope.perm_choose_list;
     };
 
+
     $scope.get_combos = function() {
-        var set_items = $scope.range(1, $scope.item_count);
-        var combo_list = $scope.combinations_choose(set_items, $scope.slot_count);
-        $scope.combinations_count = combo_list.length;
-        return combo_list;
+        return $scope.combo_choose_list;
     };
 
 
