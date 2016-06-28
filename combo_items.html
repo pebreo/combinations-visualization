@@ -1,0 +1,9 @@
+<li ng-repeat="combos in get_combos()" class="list-group-item">
+
+
+    <div class="btn-group" role="group">
+      <button ng-repeat="item in make_button_row(combos)" type="button" class="btn {{item.button_type}}">{{item.text}}<div id="square" style="background:{{item.sqcolor}}"></div></button>
+    </div>
+
+
+</li>

@@ -15,12 +15,21 @@ app.directive('permElem', function () {
     };
 });
 
+app.directive('comboElem', function () {
+    return {
+        restrict: 'E',
+        templateUrl: 'combo_items.html'
+    };
+});
+
 app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
 
     $scope.cols = 1;
     $scope.item_count = 1;
     $scope.slot_count = 1;
     $scope.permutations_count = 1;
+    $scope.combinations_count = 1;
+
     $scope.item_names = {
         1: {'button_type': 'btn-primary', 'text': 'One', 'sqcolor': 'red'},
         2: {'button_type': 'btn-warning', 'text': 'Two', 'sqcolor': 'green'},
@@ -174,17 +183,12 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         return perm_list;
     };
 
-    //$scope.get_button_type = function(item){
-    //    return $scope.item_names[item].button_type;
-    //};
-    //
-    //$scope.get_button_color = function(item){
-    //    return $scope.item_names[item].sqcolor;
-    //
-    //};
-    //
-    //$scope.get_button_text = function(item){
-    //    return $scope.item_names[item].text;
-    //};
+    $scope.get_combos = function() {
+        var set_items = $scope.range(1, $scope.item_count);
+        var combo_list = $scope.combinations_choose(set_items, $scope.slot_count);
+        $scope.combinations_count = combo_list.length;
+        return combo_list;
+    };
+
 
 }]);
