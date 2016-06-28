@@ -177,6 +177,11 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
     $scope.combo_set_items = [];
     $scope.combo_choose_list = [];
 
+
+    var update_ = function() {
+
+    };
+
     $scope.$watch('item_count', function(){
         $scope.perm_set_items = $scope.range(1, $scope.item_count);
         $scope.perm_choose_list = permutations_choose($scope.perm_set_items, $scope.slot_count);
@@ -188,6 +193,20 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         $scope.combinations_count = $scope.combo_choose_list.length;
 
     });
+
+    $scope.$watch('slot_count', function(){
+        $scope.perm_set_items = $scope.range(1, $scope.item_count);
+        $scope.perm_choose_list = permutations_choose($scope.perm_set_items, $scope.slot_count);
+        $scope.permutations_count = $scope.perm_choose_list.length;
+
+        $scope.combo_choose_list = [];
+        $scope.combo_set_items = $scope.range(1, $scope.item_count);
+        $scope.combo_choose_list = $scope.combinations_choose($scope.combo_set_items, $scope.slot_count);
+        $scope.combinations_count = $scope.combo_choose_list.length;
+
+    });
+
+
 
     $scope.get_perms = function () {
         return $scope.perm_choose_list;
