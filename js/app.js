@@ -176,9 +176,6 @@ app.controller('MyCtrl', ['$scope', '$log', function ($scope, $log) {
         var perm_list = $scope.permutations_choose(set_items, $scope.slot_count);
         //$log.log($scope.perm_list);
 
-        //$scope.comb_list = $scope.combinations_choose(set_items, set_items.length);
-        //$log.log($scope.comb_list);
-        //$log.log(perm_list);
         $scope.permutations_count = perm_list.length;
         return perm_list;
     };
