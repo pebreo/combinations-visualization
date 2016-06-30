@@ -1,4 +1,4 @@
 <div class="btn-group" role="group">
-  <button ng-repeat="n in get_good_items()" type="button" class="btn {{n.button_type}}">{{n.text}}<div id="square" style="background:{{n.sqcolor}}"></div></button>
+  <button ng-repeat="n in get_good_items()" type="button" class="btn {{n.button_type}}">{{n.text}}<div ng-click="additem()" id="square" style="background:{{n.sqcolor}}"></div></button>
 
 </div>
